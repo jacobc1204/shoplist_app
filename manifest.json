@@ -5,7 +5,7 @@
     {
       "src": "shoplist_icon.ico",
       "type": "image/ico",
-      "sizes": "48x48"
+      "sizes": "32x32"
     }
   ],
   "start_url": "shoplist_app.html"
