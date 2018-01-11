@@ -1,0 +1,122 @@
+<head class="container-fluid">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+  <link rel="manifest" href="\manifest.json"></link>
+  <center>
+    <h1>My Shopping List</h1>
+  </center>
+  <div>
+    <button onClick="displayMealForm()" class="btn" id="addAMealBtn">Add A Meal</button>
+    <button onClick="displayCreateAShoppingListForm()" class="btn" id="createShoppingListBtn">Create A Shopping List</button>
+  </div>
+  <div>
+    <div id="addAMeal">
+      <h2 class="text-center">Add A Meal</h2>
+      <center>
+        <label id="mealNameLabel">Meal Name</label>
+        <input type="text" id="mealName">
+      </br>
+        <label id="ingredientsLabel">Ingredients</label>
+        <input type="text" id="ingredients">
+      </br>
+      <button type="submit" class="btn btn-primary" id="submitMealBtn">Add Meal</button>
+      </center>
+    </div>
+    <div id="createAShoppingList">
+      <h2 class="text-center">Create A Shopping List</h2>
+    </div>
+  </div>
+</head>
+
+<style>
+  body {
+    font-family: sans-serif;
+    background-color: blue;
+  }
+
+  h1 {
+    color: white;
+  }
+
+  #addAMealBtn {
+    position: relative;
+    left: 10%;
+    background-color: black;
+    color: white;
+    width: 40%;
+    padding: 30px;
+    border-radius: 20%;
+    outline: none;
+  }
+
+  #createShoppingListBtn {
+    position: relative;
+    left: 10%;
+    background-color: black;
+    color: white;
+    width: 40%;
+    padding: 30px;
+    border-radius: 20%;
+    outline: none;
+  }
+
+  #addAMeal {
+    position: relative;
+    top: 10px;
+    padding-bottom: 5%;
+    display: none;
+    border: 3px solid black;
+    color: black;
+    background-color: white;
+  }
+
+  #createAShoppingList {
+    position: relative;
+    top: 10px;
+    display: none;
+    border: 3px solid black;
+    color: black;
+    background-color: white;
+  }
+
+  #mealNameLabel {
+    padding: 5px;
+  }
+
+  #ingredientsLabel {
+    padding: 3px;
+  }
+
+  #submitMealBtn {
+    position: relative;
+    border-radius: 3px;
+    padding: 4px;
+    top: 5px;
+    left: 94px;
+  }
+
+</style>
+
+<script>
+  addAMealCount = 0;
+  createAShoppingListCount = 0;
+
+  function displayMealForm() {
+    if (addAMealCount == 0) {
+      addAMeal.style.display =  "block";
+      addAMealCount++;
+    } else {
+      addAMeal.style.display = "none";
+      addAMealCount = 0;
+    }
+  }
+
+  function displayCreateAShoppingListForm() {
+    if (createAShoppingListCount == 0) {
+      createAShoppingList.style.display = "block";
+      createAShoppingListCount++;
+    } else {
+      createAShoppingList.style.display = "none";
+      createAShoppingListCount = 0;
+    }
+  }
+</script>
