@@ -105,6 +105,10 @@
     if (addAMealCount == 0) {
       addAMeal.style.display =  "block";
       addAMealCount++;
+      if (createAShoppingListCount == 1) {
+        createAShoppingList.style.display = "none";
+        createAShoppingListCount = 0;
+      }
     } else {
       addAMeal.style.display = "none";
       addAMealCount = 0;
@@ -115,9 +119,14 @@
     if (createAShoppingListCount == 0) {
       createAShoppingList.style.display = "block";
       createAShoppingListCount++;
+      if (addAMealCount == 1) {
+        addAMeal.style.display = "none";
+        addAMealCount = 0;
+      }
     } else {
       createAShoppingList.style.display = "none";
       createAShoppingListCount = 0;
     }
   }
+
 </script>
