@@ -1,98 +1,127 @@
 <head class="container-fluid">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
   <link rel="manifest" href="\shoplist_app\manifest.json"></link>
   <link rel="icon" href="\shoplist_app\shoplist_icon.ico"></link>
-  <center>
-    <h1>My Shopping List</h1>
-  </center>
-  <div>
-    <button onClick="displayMealForm()" class="btn" id="addAMealBtn">Add A Meal</button>
-    <button onClick="displayCreateAShoppingListForm()" class="btn" id="createShoppingListBtn">Create A Shopping List</button>
-  </div>
-  <div>
+  <div class="container">
+    <div class="item text-center" id="sidebar">Shopping List</div>
+    <h1 class="item text-center">My Shopping List</h1>
+    <button onclick="displayMealForm()" class="item btn btn-primary text-center" id="addAMealBtn">Add A Meal</button>
+    <button onclick="displayCreateAShoppingListForm()" class="item btn btn-primary text-center" id="createAShoppingListBtn">Create A Shopping List</button>
     <div id="addAMeal">
-      <h2 class="text-center">Add A Meal</h2>
-      <center>
-        <label id="mealNameLabel">Meal Name</label>
-        <input type="text" id="mealName">
-      </br>
-        <label id="ingredientsLabel">Ingredients</label>
-        <input type="text" id="ingredients">
-      </br>
-      <button type="submit" class="btn btn-primary" id="submitMealBtn">Add Meal</button>
-      </center>
+      <label class="text-center" id="mealLabel">Add A Meal</label>
+      <input type="text" placeholder="Meal Name" id="mealName"></input>
+      <input type="text" placeholder="Ingredients" id="ingredients"></input>
+      <input type="submit" class="btn btn-primary" id="mealSubmit"></input>
     </div>
     <div id="createAShoppingList">
-      <h2 class="text-center">Create A Shopping List</h2>
+      <label class="text-center" id="createLabel">Create A Shopping List</label>
+      <ul class="mealIngredients">
+        <li class="ingredient"><input type="checkbox">&nbsp;1</li>
+        <li class="ingredient"><input type="checkbox">&nbsp;2</li>
+        <li class="ingredient"><input type="checkbox">&nbsp;3</li>
+        <li class="ingredient"><input type="checkbox">&nbsp;4</li>
+        <li class="ingredient"><input type="checkbox">&nbsp;5</li>
+        <li class="ingredient"><input type="checkbox">&nbsp;6</li>
+        <li class="ingredient"><input type="checkbox">&nbsp;7</li>
+        <li class="ingredient"><input type="checkbox">&nbsp;8</li>
+        <li class="ingredient"><input type="checkbox">&nbsp;9</li>
+        <li class="ingredient"><input type="checkbox">&nbsp;10</li>
+      </ul>
     </div>
   </div>
 </head>
 
+
 <style>
+
+  .container {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 180px 1fr 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 10px;
+    grid-template-areas:
+      "shoplist   header   header"
+      "shoplist   btn1     btn1  "
+      "shoplist   btn2     btn2  "
+      ". . ."
+      "menu       menu     menu  "
+  }
+
+  .item {
+    padding: 10px;
+  }
+
   body {
-    font-family: sans-serif;
-    background-color: blue;
+    font-family: Quicksand;
+    background: url(15.png) no-repeat center center fixed;
+    background-size: cover;
+    height: 90%;
   }
 
   h1 {
+    font-size: 40px;
     color: white;
+    grid-area: header;
   }
 
   #addAMealBtn {
-    position: relative;
-    left: 10%;
-    background-color: black;
-    color: white;
-    width: 40%;
-    padding: 30px;
-    border-radius: 20%;
-    outline: none;
+    font-size: 20px;
+    color: black;
+    background-color: #cc00dd;
+    grid-area: btn1;
   }
 
-  #createShoppingListBtn {
-    position: relative;
-    left: 10%;
-    background-color: black;
-    color: white;
-    width: 40%;
-    padding: 30px;
-    border-radius: 20%;
-    outline: none;
+  #createAShoppingListBtn {
+    font-size: 20px;
+    color: black;
+    background-color: #cc00dd;
+    grid-area: btn2;
+  }
+
+  #sidebar {
+    background-color: #cacccc;
+    grid-area: shoplist;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 7px;
   }
 
   #addAMeal {
-    position: relative;
-    top: 10px;
-    padding-bottom: 5%;
-    display: none;
-    border: 3px solid black;
+    background-color: #abDDfd;
     color: black;
-    background-color: white;
+    font-size: 30px;
+    text-align: center;
+    padding: 20px;
+    display: none;
+    grid-area: menu;
+    grid-gap: 10px;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+
+  #mealSubmit {
+    background-color: #999999;
   }
 
   #createAShoppingList {
-    position: relative;
-    top: 10px;
-    display: none;
-    border: 3px solid black;
+    background-color: #abDDfd;
     color: black;
-    background-color: white;
+    font-size: 30px;
+    text-align: center;
+    padding: 20px;
+    display: none;
+    grid-area: menu;
   }
 
-  #mealNameLabel {
-    padding: 5px;
+  ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 
-  #ingredientsLabel {
-    padding: 3px;
-  }
-
-  #submitMealBtn {
-    position: relative;
-    border-radius: 3px;
-    padding: 4px;
-    top: 5px;
-    left: 94px;
+  li {
+    list-style: none;
   }
 
 </style>
@@ -103,7 +132,7 @@
 
   function displayMealForm() {
     if (addAMealCount == 0) {
-      addAMeal.style.display =  "block";
+      addAMeal.style.display =  "grid";
       addAMealCount++;
       if (createAShoppingListCount == 1) {
         createAShoppingList.style.display = "none";
@@ -117,7 +146,7 @@
 
   function displayCreateAShoppingListForm() {
     if (createAShoppingListCount == 0) {
-      createAShoppingList.style.display = "block";
+      createAShoppingList.style.display = "grid";
       createAShoppingListCount++;
       if (addAMealCount == 1) {
         addAMeal.style.display = "none";
