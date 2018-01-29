@@ -3,6 +3,10 @@
   <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
   <link rel="manifest" href="\shoplist_app\manifest.json"></link>
   <link rel="icon" href="\shoplist_app\shoplist_icon.ico"></link>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
   <div class="container">
     <div class="item text-center" id="sidebar">Shopping List</div>
     <h1 class="item text-center">My Shopping List</h1>
@@ -12,31 +16,29 @@
       <label class="text-center" id="mealLabel">Add A Meal</label>
       <input type="text" placeholder="Meal Name" id="mealName"></input>
       <input type="text" placeholder="Ingredients" id="ingredients"></input>
-      <input type="submit" class="btn btn-primary" id="mealSubmit"></input>
+      <input type="submit" value="Add" class="btn btn-primary" id="mealSubmit"></input>
     </div>
     <div id="createAShoppingList">
       <label class="text-center" id="createLabel">Create A Shopping List</label>
-      <ul class="mealIngredients">
-        <li class="ingredient"><input type="checkbox">&nbsp;1</li>
-        <li class="ingredient"><input type="checkbox">&nbsp;2</li>
-        <li class="ingredient"><input type="checkbox">&nbsp;3</li>
-        <li class="ingredient"><input type="checkbox">&nbsp;4</li>
-        <li class="ingredient"><input type="checkbox">&nbsp;5</li>
-        <li class="ingredient"><input type="checkbox">&nbsp;6</li>
-        <li class="ingredient"><input type="checkbox">&nbsp;7</li>
-        <li class="ingredient"><input type="checkbox">&nbsp;8</li>
-        <li class="ingredient"><input type="checkbox">&nbsp;9</li>
-        <li class="ingredient"><input type="checkbox">&nbsp;10</li>
-      </ul>
+      <div class="mealsList">
+        <button class="items">1</button>
+        <button class="items">2</button>
+        <button class="items">3</button>
+        <button class="items">4</button>
+        <button class="items">5</button>
+        <button class="items">6</button>
+        <button class="items">7</button>
+        <button class="items">8</button>
+        <button class="items">9</button>
+        <button class="items">10</button>
+      </div>
     </div>
   </div>
-</head>
-
+</body>
 
 <style>
 
   .container {
-    margin-top: 20px;
     display: grid;
     grid-template-columns: 180px 1fr 1fr;
     grid-template-rows: repeat(3, 1fr);
@@ -57,7 +59,7 @@
     font-family: Quicksand;
     background: url(15.png) no-repeat center center fixed;
     background-size: cover;
-    height: 90%;
+    margin: 20px;
   }
 
   h1 {
@@ -71,6 +73,26 @@
     color: black;
     background-color: #cc00dd;
     grid-area: btn1;
+    box-shadow: 0px 0px 5px black;
+    animation-delay: 3ms;
+  }
+
+  #addAMealBtn:hover {
+    background-color: #aa00cc;
+    box-shadow: 5px 5px 5px black;
+  }
+
+  #mealSubmit {
+    background-color: #999999;
+    color: black;
+    padding: 10px;
+    font-size: 15px;
+    box-shadow: 0px 0px 3px black;
+  }
+
+  #mealSubmit:hover {
+    background-color: #888888;
+    box-shadow: 3px 3px 3px black;
   }
 
   #createAShoppingListBtn {
@@ -78,6 +100,13 @@
     color: black;
     background-color: #cc00dd;
     grid-area: btn2;
+    box-shadow: 0px 0px 5px black;
+    animation-delay: 3ms;
+  }
+
+  #createAShoppingListBtn:hover {
+    background-color: #aa00cc;
+    box-shadow: 5px 5px 5px black;
   }
 
   #sidebar {
@@ -86,6 +115,13 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 7px;
+    box-shadow: 0px 0px 5px black;
+    animation-delay: 3ms;
+  }
+
+  #sidebar:hover {
+    background-color: #b9bbbb;
+    box-shadow: 5px 5px 5px black;
   }
 
   #addAMeal {
@@ -96,7 +132,7 @@
     padding: 20px;
     display: none;
     grid-area: menu;
-    grid-gap: 10px;
+    grid-gap: 7px;
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto;
   }
@@ -113,15 +149,26 @@
     padding: 20px;
     display: none;
     grid-area: menu;
+    grid-gap: 7px;
+    grid-template-rows: 50px auto;
   }
 
-  ul {
+  .mealsList {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
   }
 
-  li {
-    list-style: none;
+  .items {
+    padding: 10px;
+    background-color: rgba(80,80,80, 0.3);
+    border: none;
+    box-shadow: 0px 0px 3px black;
+    animation-delay: 3ms;
+  }
+
+  .items:hover {
+    background-color: rgba(40, 40, 40, 0.4);
+    box-shadow: 3px 3px 3px black;
   }
 
 </style>
