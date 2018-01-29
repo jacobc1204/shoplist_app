@@ -1,4 +1,4 @@
-<head class="container-fluid">
+<head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
   <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
   <link rel="manifest" href="\shoplist_app\manifest.json"></link>
@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
-<body>
+<body class="container-fluid">
   <div class="container">
     <div class="item text-center" id="sidebar">Shopping List</div>
     <h1 class="item text-center">My Shopping List</h1>
@@ -40,7 +40,7 @@
 
   .container {
     display: grid;
-    grid-template-columns: 180px 1fr 1fr;
+    grid-template-columns: 30vmin 1fr 1fr;
     grid-template-rows: repeat(3, 1fr);
     grid-gap: 10px;
     grid-template-areas:
@@ -59,17 +59,17 @@
     font-family: Quicksand;
     background: url(15.png) no-repeat center center fixed;
     background-size: cover;
-    margin: 20px;
+    margin: 2%;
   }
 
   h1 {
-    font-size: 40px;
+    font-size: 11vmin;
     color: white;
     grid-area: header;
   }
 
   #addAMealBtn {
-    font-size: 20px;
+    font-size: 5vmin;
     color: black;
     background-color: #cc00dd;
     grid-area: btn1;
@@ -85,8 +85,8 @@
   #mealSubmit {
     background-color: #999999;
     color: black;
-    padding: 10px;
-    font-size: 15px;
+    padding: 12px;
+    font-size: 3vmin;
     box-shadow: 0px 0px 3px black;
   }
 
@@ -96,7 +96,7 @@
   }
 
   #createAShoppingListBtn {
-    font-size: 20px;
+    font-size: 5vmin;
     color: black;
     background-color: #cc00dd;
     grid-area: btn2;
@@ -112,6 +112,7 @@
   #sidebar {
     background-color: #cacccc;
     grid-area: shoplist;
+    font-size: 3vmin;
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 7px;
@@ -127,7 +128,7 @@
   #addAMeal {
     background-color: #abDDfd;
     color: black;
-    font-size: 30px;
+    font-size: 5vmin;
     text-align: center;
     padding: 20px;
     display: none;
@@ -144,7 +145,7 @@
   #createAShoppingList {
     background-color: #abDDfd;
     color: black;
-    font-size: 30px;
+    font-size: 5vmin;
     text-align: center;
     padding: 20px;
     display: none;
