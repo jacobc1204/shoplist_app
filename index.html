@@ -1,8 +1,10 @@
 <head>
+  <title>My Shopping List</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
   <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
   <link rel="manifest" href="\shoplist_app\manifest.json"></link>
   <link rel="icon" href="\shoplist_app\shoplist_icon.ico"></link>
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
@@ -16,21 +18,21 @@
       <label class="text-center" id="mealLabel">Add A Meal</label>
       <input type="text" placeholder="Meal Name" id="mealName"></input>
       <input type="text" placeholder="Ingredients" id="ingredients"></input>
-      <input type="submit" value="Add" class="btn btn-primary" id="mealSubmit"></input>
+      <input type="submit" value="Add" class="btn btn-primary" id="mealSubmit" onclick='saveMeal();'></input>
     </div>
     <div id="createAShoppingList">
       <label class="text-center" id="createLabel">Create A Shopping List</label>
       <div class="mealsList">
-        <button class="items">1</button>
-        <button class="items">2</button>
-        <button class="items">3</button>
-        <button class="items">4</button>
-        <button class="items">5</button>
-        <button class="items">6</button>
-        <button class="items">7</button>
-        <button class="items">8</button>
-        <button class="items">9</button>
-        <button class="items">10</button>
+        <button class="items item1">1</button>
+        <button class="items item2">2</button>
+        <button class="items item3">3</button>
+        <button class="items item4">4</button>
+        <button class="items item5">5</button>
+        <button class="items item6">6</button>
+        <button class="items item7">7</button>
+        <button class="items item8">8</button>
+        <button class="items item9">9</button>
+        <button class="items item10">10</button>
       </div>
     </div>
   </div>
@@ -153,7 +155,7 @@
     display: none;
     grid-area: menu;
     grid-gap: 7px;
-    grid-template-rows: 50px auto;
+    grid-template-rows: auto auto;
   }
 
   .mealsList {
@@ -197,6 +199,7 @@
   function displayCreateAShoppingListForm() {
     if (createAShoppingListCount == 0) {
       createAShoppingList.style.display = "grid";
+      getMeals();
       createAShoppingListCount++;
       if (addAMealCount == 1) {
         addAMeal.style.display = "none";
@@ -205,6 +208,19 @@
     } else {
       createAShoppingList.style.display = "none";
       createAShoppingListCount = 0;
+    }
+  }
+
+  function saveMeal() {
+    var mealName = document.getElementById('mealName').value;
+    var ingredients = document.getElementById('ingredients').value;
+    localStorage.setItem(mealName = mealName, ingredients = ingredients);
+    console.log(localStorage);
+  }
+
+  function getMeals(callback) {
+    for (var i = 0; i < localStorage.length; i++) {
+      document.querySelector('.item'+(i+1)).innerHTML = localStorage.key(i);
     }
   }
 
