@@ -10,7 +10,10 @@
 
 <body class="container-fluid">
   <div class="container">
-    <div class="item text-center" id="sidebar">Shopping List</div>
+    <div id="sidebar">
+      <div class="item text-center">Shopping List</div>
+      <div class="shoppingList"></div>
+    </div>
     <h1 class="item text-center">My Shopping List</h1>
     <button onclick="displayMealForm()" class="item btn btn-primary text-center" id="addAMealBtn">Add A Meal</button>
     <button onclick="displayCreateAShoppingListForm()" class="item btn btn-primary text-center" id="createAShoppingListBtn">Create A Shopping List</button>
@@ -23,16 +26,16 @@
     <div id="createAShoppingList">
       <label class="text-center" id="createLabel">Create A Shopping List</label>
       <div class="mealsList">
-        <button class="items item1">1</button>
-        <button class="items item2">2</button>
-        <button class="items item3">3</button>
-        <button class="items item4">4</button>
-        <button class="items item5">5</button>
-        <button class="items item6">6</button>
-        <button class="items item7">7</button>
-        <button class="items item8">8</button>
-        <button class="items item9">9</button>
-        <button class="items item10">10</button>
+        <button class="items item1" onclick='getIngredients(this.innerHTML);'>1</button>
+        <button class="items item2" onclick='getIngredients(this.innerHTML);'>2</button>
+        <button class="items item3" onclick='getIngredients(this.innerHTML);'>3</button>
+        <button class="items item4" onclick='getIngredients(this.innerHTML);'>4</button>
+        <button class="items item5" onclick='getIngredients(this.innerHTML);'>5</button>
+        <button class="items item6" onclick='getIngredients(this.innerHTML);'>6</button>
+        <button class="items item7" onclick='getIngredients(this.innerHTML);'>7</button>
+        <button class="items item8" onclick='getIngredients(this.innerHTML);'>8</button>
+        <button class="items item9" onclick='getIngredients(this.innerHTML);'>9</button>
+        <button class="items item10" onclick='getIngredients(this.innerHTML);'>10</button>
       </div>
     </div>
   </div>
@@ -118,7 +121,7 @@
     grid-area: shoplist;
     font-size: 3vmin;
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-rows: repeat(auto-fill, 30px);
     grid-gap: 7px;
     box-shadow: 0px 0px 5px black;
     animation-delay: 3ms;
@@ -127,6 +130,12 @@
   #sidebar:hover {
     background-color: #b9bbbb;
     box-shadow: 5px 5px 5px black;
+  }
+
+  .shoppingList {
+    font-size: 2vmin;
+    justify-self: center;
+    align-self: start;
   }
 
   #addAMeal {
@@ -213,15 +222,25 @@
 
   function saveMeal() {
     var mealName = document.getElementById('mealName').value;
-    var ingredients = document.getElementById('ingredients').value;
+    var ingredients = document.getElementById('ingredients').value.split(", ").join("<br>");
     localStorage.setItem(mealName = mealName, ingredients = ingredients);
-    console.log(localStorage);
   }
 
   function getMeals(callback) {
     for (var i = 0; i < localStorage.length; i++) {
       document.querySelector('.item'+(i+1)).innerHTML = localStorage.key(i);
     }
+  }
+
+  const ingredientsList = [];
+
+  function getIngredients(key) {
+    ingredientsList.push(localStorage.getItem(key));
+    document.querySelector(".shoppingList").innerHTML = ingredientsList.join("<br>");
+  }
+
+  function makeButtons() {
+    
   }
 
 </script>
