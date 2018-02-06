@@ -4,14 +4,13 @@
   <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
   <link rel="manifest" href="\shoplist_app\manifest.json"></link>
   <link rel="icon" href="\shoplist_app\shoplist_icon.ico"></link>
-  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
-<body class="container-fluid">
+<body class="container-fluid" onload="checkForIngredients();">
   <div class="container">
     <div id="sidebar">
-      <div class="item text-center">Shopping List</div>
+      <a href="shopping_list.html"><div class="item text-center">Shopping List</div></a>
       <div class="shoppingList"></div>
     </div>
     <h1 class="item text-center">My Shopping List</h1>
@@ -25,18 +24,7 @@
     </div>
     <div id="createAShoppingList">
       <label class="text-center" id="createLabel">Create A Shopping List</label>
-      <div class="mealsList">
-        <button class="items item1" onclick='getIngredients(this.innerHTML);'>1</button>
-        <button class="items item2" onclick='getIngredients(this.innerHTML);'>2</button>
-        <button class="items item3" onclick='getIngredients(this.innerHTML);'>3</button>
-        <button class="items item4" onclick='getIngredients(this.innerHTML);'>4</button>
-        <button class="items item5" onclick='getIngredients(this.innerHTML);'>5</button>
-        <button class="items item6" onclick='getIngredients(this.innerHTML);'>6</button>
-        <button class="items item7" onclick='getIngredients(this.innerHTML);'>7</button>
-        <button class="items item8" onclick='getIngredients(this.innerHTML);'>8</button>
-        <button class="items item9" onclick='getIngredients(this.innerHTML);'>9</button>
-        <button class="items item10" onclick='getIngredients(this.innerHTML);'>10</button>
-      </div>
+      <div class="mealsList"></div>
     </div>
   </div>
 </body>
@@ -117,19 +105,35 @@
   }
 
   #sidebar {
-    background-color: #cacccc;
+    background: radial-gradient(pink, gray);
     grid-area: shoplist;
     font-size: 3vmin;
     display: grid;
     grid-template-rows: repeat(auto-fill, 30px);
     grid-gap: 7px;
     box-shadow: 0px 0px 5px black;
-    animation-delay: 3ms;
+    transition-duration: 2ms;
   }
 
   #sidebar:hover {
-    background-color: #b9bbbb;
+    background: radial-gradient(gray, pink);
     box-shadow: 5px 5px 5px black;
+  }
+
+  a:link {
+      text-decoration: none;
+  }
+
+  a:visited {
+      text-decoration: none;
+  }
+
+  a:hover {
+      text-decoration: none;
+  }
+
+  a:active {
+      text-decoration: none;
   }
 
   .shoppingList {
@@ -195,6 +199,7 @@
     if (addAMealCount == 0) {
       addAMeal.style.display =  "grid";
       addAMealCount++;
+      document.getElementById('mealName').focus();
       if (createAShoppingListCount == 1) {
         createAShoppingList.style.display = "none";
         createAShoppingListCount = 0;
@@ -224,12 +229,29 @@
     var mealName = document.getElementById('mealName').value;
     var ingredients = document.getElementById('ingredients').value.split(", ").join("<br>");
     localStorage.setItem(mealName = mealName, ingredients = ingredients);
+    alert("Meal Saved!");
+    document.getElementById('mealName').value = "";
+    document.getElementById('ingredients').value = "";
   }
 
-  function getMeals(callback) {
-    for (var i = 0; i < localStorage.length; i++) {
-      document.querySelector('.item'+(i+1)).innerHTML = localStorage.key(i);
+  var buttonsCount = 0;
+
+  const meals = new Set();
+
+  function getMeals() {
+    console.log(buttonsCount);
+    if (buttonsCount < localStorage.length) {
+      Object.keys(localStorage).forEach(function(key){
+        meals.add(key);
+      })
+      var mealValues = meals.values();
+      document.querySelector(".mealsList").innerHTML = "";
+      for (var i = 0; i < meals.size; i++) {
+        document.querySelector(".mealsList").innerHTML += ` <button class="items" onclick="getIngredients(this.innerHTML);">${mealValues.next().value}</button> `;
+        buttonsCount++;
+      }
     }
+    buttonsCount = 0;
   }
 
   const ingredientsList = [];
@@ -237,10 +259,14 @@
   function getIngredients(key) {
     ingredientsList.push(localStorage.getItem(key));
     document.querySelector(".shoppingList").innerHTML = ingredientsList.join("<br>");
+    sessionStorage.setItem("shoppinglist", ingredientsList.join("<br>"));
   }
 
-  function makeButtons() {
-    
+  function checkForIngredients() {
+    if (sessionStorage.length > 0) {
+      ingredientsList.push(sessionStorage.getItem("shoppinglist"));
+      document.querySelector(".shoppingList").innerHTML = ingredientsList.join("<br>");
+    }
   }
 
 </script>
