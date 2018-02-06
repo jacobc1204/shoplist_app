@@ -1,0 +1,50 @@
+<head>
+  <title>My Shopping List</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+  <link rel="manifest" href="\shoplist_app\manifest.json"></link>
+  <link rel="icon" href="\shoplist_app\shoplist_icon.ico"></link>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body onload="getShoppingList();">
+    <header>
+        <h1 class="text-center">Shopping List</h1>
+        <div>
+            <a href="index.html"><button id="backBtn"><i class="fas fa-arrow-left"></i> Back</button></a>
+        </div>
+    </header>
+    <section>
+        <div class="shoppingList text-center"></div>
+    </section>
+</body>
+
+<style>
+    
+    body {
+        margin: 5%;
+        background: radial-gradient(pink, gray);
+        font-family: Quicksand;
+    }
+
+    #backBtn {
+        position: fixed;
+        top: 12%;
+        left: 15%;
+    }
+
+    .shoppingList {
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+
+</style>
+
+<script>
+
+    function getShoppingList() {
+        var ingredientsList = sessionStorage.getItem('shoppinglist');
+        document.querySelector('.shoppingList').innerHTML = ingredientsList;
+    }
+
+</script>
