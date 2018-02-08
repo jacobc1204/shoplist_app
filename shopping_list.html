@@ -8,15 +8,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
-<body onload="getShoppingList();">
+<body onload="getShoppingList();" class="text-center">
     <header>
-        <h1 class="text-center">Shopping List</h1>
+        <h1>Shopping List</h1>
         <div>
             <a href="index.html"><button id="backBtn"><i class="fas fa-arrow-left"></i> Back</button></a>
         </div>
     </header>
     <section>
-        <div class="shoppingList text-center"></div>
+        <div class="shoppingList">
+            <div id="listContainer"></div>
+        </div>
     </section>
 </body>
 
@@ -29,13 +31,35 @@
     }
 
     #backBtn {
-        position: fixed;
+        position: absolute;
         top: 12%;
-        left: 15%;
+        left: 5%;
     }
 
     .shoppingList {
         background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    li {
+        list-style-type: none;
+    }
+
+    input[type="checkbox"] {
+        float: left;
+        width: 40px;
+        height: 40px;
+        margin-left: 1%;
+        vertical-align: middle;
+        cursor: pointer;
+    }
+
+    input[type="checkbox"]:checked + label {
+        text-decoration: line-through;
+        color: grey;
+    }
+
+    label {
+        font-size: 30px;
     }
 
 </style>
@@ -44,7 +68,14 @@
 
     function getShoppingList() {
         var ingredientsList = sessionStorage.getItem('shoppinglist');
-        document.querySelector('.shoppingList').innerHTML = ingredientsList;
+        ingredientsList = ingredientsList.split('<br>');
+        for (i = 0; i < ingredientsList.length; i++) {
+            var ingredient = ingredientsList[i];
+            document.querySelector('#listContainer').innerHTML += `
+            <li><input type="checkbox" />
+            <label>${ingredient}</label></li>
+            `;
+        }
     }
 
 </script>
