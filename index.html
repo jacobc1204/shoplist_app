@@ -1,33 +1,38 @@
-<head>
-  <title>My Shopping List</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
-  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
-  <link rel="manifest" href="\shoplist_app\manifest.json"></link>
-  <link rel="icon" href="\shoplist_app\shoplist_icon.ico"></link>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
+<!DOCTYPE html>
+<html lang="en">
 
-<body class="container-fluid" onload="checkForIngredients();">
-  <div class="container">
-    <div id="sidebar">
-      <a href="shopping_list.html"><div class="item text-center">Shopping List</div></a>
-      <div class="shoppingList"></div>
+  <head>
+    <meta charset="utf-8"/>
+    <title>My Shopping List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet"/>
+    <link rel="manifest" href="\shoplist_app\manifest.json"></link>
+    <link rel="icon" href="\shoplist_app\shoplist_icon.ico"></link>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  </head>
+
+  <body class="container-fluid" onload="checkForIngredients();">
+    <div class="container">
+      <div id="sidebar">
+        <a href="shopping_list.html"><div class="item text-center">Shopping List</div></a>
+        <div class="shoppingList"></div>
+      </div>
+      <h1 class="item text-center">My Shopping List</h1>
+      <button onclick="displayMealForm()" class="item btn btn-primary text-center" id="addAMealBtn">Add A Meal</button>
+      <button onclick="displayCreateAShoppingListForm()" class="item btn btn-primary text-center" id="createAShoppingListBtn">Create A Shopping List</button>
+      <div id="addAMeal">
+        <label class="text-center" id="mealLabel">Add A Meal</label>
+        <input type="text" placeholder="Meal Name" id="mealName"></input>
+        <input type="text" placeholder="Ingredients" id="ingredients"></input>
+        <input type="submit" value="Add" class="btn btn-primary" id="mealSubmit" onclick='saveMeal();'></input>
+      </div>
+      <div id="createAShoppingList">
+        <label class="text-center" id="createLabel">Create A Shopping List</label>
+        <div class="mealsList"></div>
+      </div>
     </div>
-    <h1 class="item text-center">My Shopping List</h1>
-    <button onclick="displayMealForm()" class="item btn btn-primary text-center" id="addAMealBtn">Add A Meal</button>
-    <button onclick="displayCreateAShoppingListForm()" class="item btn btn-primary text-center" id="createAShoppingListBtn">Create A Shopping List</button>
-    <div id="addAMeal">
-      <label class="text-center" id="mealLabel">Add A Meal</label>
-      <input type="text" placeholder="Meal Name" id="mealName"></input>
-      <input type="text" placeholder="Ingredients" id="ingredients"></input>
-      <input type="submit" value="Add" class="btn btn-primary" id="mealSubmit" onclick='saveMeal();'></input>
-    </div>
-    <div id="createAShoppingList">
-      <label class="text-center" id="createLabel">Create A Shopping List</label>
-      <div class="mealsList"></div>
-    </div>
-  </div>
-</body>
+  </body>
+</html>
 
 <style>
 
@@ -225,9 +230,16 @@
     }
   }
 
+  function uniq(a) {
+    var seen = {};
+    return a.filter(function(item) {
+        return seen.hasOwnProperty(item) ? false : (seen[item] = true);
+    });
+  }
+
   function saveMeal() {
     var mealName = document.getElementById('mealName').value;
-    var ingredients = document.getElementById('ingredients').value.split(", ").join("<br>");
+    var ingredients = document.getElementById('ingredients').value.split(", ");
     localStorage.setItem(mealName = mealName, ingredients = ingredients);
     alert("Meal Saved!");
     document.getElementById('mealName').value = "";
@@ -239,7 +251,6 @@
   const meals = new Set();
 
   function getMeals() {
-    console.log(buttonsCount);
     if (buttonsCount < localStorage.length) {
       Object.keys(localStorage).forEach(function(key){
         meals.add(key);
@@ -254,15 +265,20 @@
     buttonsCount = 0;
   }
 
-  const ingredientsList = [];
+  var ingredientsList = [];
 
   function getIngredients(key) {
-    ingredientsList.push(localStorage.getItem(key));
-    document.querySelector(".shoppingList").innerHTML = ingredientsList.join("<br>");
-    sessionStorage.setItem("shoppinglist", ingredientsList.join("<br>"));
+    ingredientsStr = localStorage.getItem(key).split(",");
+    for (i = 0; i < ingredientsStr.length; i++) {
+      ingredientsList.push(ingredientsStr[i]);
+    }
+    var ingredients = uniq(ingredientsList);
+    document.querySelector(".shoppingList").innerHTML = ingredients.join("<br>");
+    sessionStorage.setItem("shoppinglist", ingredients.join("<br>"));
   }
 
   function checkForIngredients() {
+    var ingredientsList = [];
     if (sessionStorage.length > 0) {
       ingredientsList.push(sessionStorage.getItem("shoppinglist"));
       document.querySelector(".shoppingList").innerHTML = ingredientsList.join("<br>");
