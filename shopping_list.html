@@ -1,86 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="utf-8"/>  
-        <title>My Shopping List</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
-        <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet"/>
-        <link rel="manifest" href="\shoplist_app\manifest.json"></link>
-        <link rel="icon" href="\shoplist_app\shoplist_icon.ico"></link>
-        <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    </head>
+  <head>
+    <meta charset="utf-8"/>  
+    <title>My Shopping List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet"/>
+    <link rel="manifest" href="\shoplist_app\manifest.json"></link>
+    <link rel="icon" href="\shoplist_app\shoplist_icon.ico"></link>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  </head>
 
-    <body onload="getShoppingList();" class="text-center">
-        <header>
-            <h1>Shopping List</h1>
-            <div>
-                <a href="index.html"><button id="backBtn"><i class="fas fa-arrow-left"></i> Back</button></a>
-            </div>
-        </header>
-        <section>
-            <div class="shoppingList">
-                <div id="listContainer"></div>
-            </div>
-        </section>
-    </body>
+  <body onload="getShoppingList();" class="text-center">
+    <header>
+      <h1>Shopping List</h1>
+        <div>
+          <a href="index.html"><button id="backBtn"><i class="fas fa-arrow-left"></i> Back</button></a>
+        </div>
+    </header>
+    <section>
+      <div class="shoppingList">
+        <div id="listContainer"></div>
+      </div>
+  	</section>
+  </body>
 </html>
 
 <style>
     
-    body {
-        margin: 5%;
-        background: radial-gradient(pink, gray);
-        font-family: Quicksand;
-    }
+  body {
+    margin: 5%;
+    background: radial-gradient(pink, gray);
+    font-family: Quicksand;
+  }
 
-    #backBtn {
-        position: absolute;
-        top: 12%;
-        left: 5%;
-    }
+	/* media query to display on mobile */
+  #backBtn {
+		display: none;
+		position: absolute;
+		top: 10px;
+		left: 15px;
+		padding: 5px;
+		background: rgba(0, 0, 0, 0);
+		border: none;
+		font-size: 5vmin;
+		color: blueviolet;
+  }
 
-    .shoppingList {
-        background-color: rgba(255, 255, 255, 0.3);
-    }
+  .shoppingList {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
 
-    li {
-        list-style-type: none;
-    }
+  li {
+    list-style-type: none;
+  }
 
-    input[type="checkbox"] {
-        float: left;
-        width: 40px;
-        height: 40px;
-        margin-left: 1%;
-        vertical-align: middle;
-        cursor: pointer;
-    }
+  input[type="checkbox"] {
+    float: left;
+    width: 40px;
+    height: 40px;
+    margin-left: 1%;
+    vertical-align: middle;
+    cursor: pointer;
+  }
 
-    input[type="checkbox"]:checked + label {
-        text-decoration: line-through;
-        color: grey;
-    }
+  input[type="checkbox"]:checked + label {
+    text-decoration: line-through;
+    color: grey;
+  }
 
-    label {
-        font-size: 30px;
-    }
+  label {
+    font-size: 30px;
+  }
 
 </style>
 
 <script>
 
-    function getShoppingList() {
-        var ingredientsList = sessionStorage.getItem('shoppinglist');
-        ingredientsList = ingredientsList.split('<br>');
-        for (i = 0; i < ingredientsList.length; i++) {
-            var ingredient = ingredientsList[i];
-            document.querySelector('#listContainer').innerHTML += `
-            <li><input type="checkbox" />
-            <label>${ingredient}</label></li>
-            `;
-        }
+  function getShoppingList() {
+    var ingredientsList = sessionStorage.getItem('shoppinglist');
+    ingredientsList = ingredientsList.split('<br>');
+    for (i = 0; i < ingredientsList.length; i++) {
+      var ingredient = ingredientsList[i];
+      document.querySelector('#listContainer').innerHTML += `
+				<li><input type="checkbox" />
+				<label>${ingredient}</label></li>
+				`;
     }
+  }
 
 </script>

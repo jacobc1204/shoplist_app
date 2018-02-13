@@ -35,7 +35,7 @@
 </html>
 
 <style>
-
+                              /* media query to change the layout on mobile */
   .container {
     display: grid;
     grid-template-columns: 30vmin 1fr 1fr;
@@ -58,7 +58,7 @@
     background: url(15.png) no-repeat center center fixed;
     background-size: cover;
     background-attachment: fixed;
-    margin: 2%;
+    margin: 5%;
   }
 
   h1 {
@@ -73,7 +73,7 @@
     background-color: #cc00dd;
     grid-area: btn1;
     box-shadow: 0px 0px 5px black;
-    animation-delay: 3ms;
+    transition: 1s;
   }
 
   #addAMealBtn:hover {
@@ -101,7 +101,7 @@
     background-color: #cc00dd;
     grid-area: btn2;
     box-shadow: 0px 0px 5px black;
-    animation-delay: 3ms;
+    transition: 1s;
   }
 
   #createAShoppingListBtn:hover {
@@ -110,35 +110,39 @@
   }
 
   #sidebar {
-    background: radial-gradient(pink, gray);
+    background: gray;
     grid-area: shoplist;
     font-size: 3vmin;
     display: grid;
     grid-template-rows: repeat(auto-fill, 30px);
     grid-gap: 7px;
     box-shadow: 0px 0px 5px black;
-    transition-duration: 2ms;
+    transition: 1s;
   }
 
   #sidebar:hover {
-    background: radial-gradient(gray, pink);
+    background: white;
     box-shadow: 5px 5px 5px black;
   }
 
   a:link {
       text-decoration: none;
+      color: black;
   }
 
   a:visited {
       text-decoration: none;
+      color: black;
   }
 
   a:hover {
       text-decoration: none;
+      color: black;
   }
 
   a:active {
       text-decoration: none;
+      color: black;
   }
 
   .shoppingList {
@@ -186,7 +190,7 @@
     background-color: rgba(80,80,80, 0.3);
     border: none;
     box-shadow: 0px 0px 3px black;
-    animation-delay: 3ms;
+    transition: 1s;
   }
 
   .items:hover {
